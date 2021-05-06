@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Endereco {
@@ -14,12 +15,26 @@ public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String logradouro;
+	
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String numero;
+	
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String complemento;
+	
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String bairro;
+	
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String cidade;
+	
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String estado;
+	
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String cep;
 
 	@ManyToOne

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 public class Usuario {
@@ -18,18 +23,28 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String nome;
+
+	@Column(unique = true)
+	@Email(message = "Digite um e-mail válido")
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String email;
+
+	@Column(unique = true)
+	@CPF(message = "Digite um CPF válido")
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String cpf;
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private Date dataNascimento;
-	
+
 	@OneToMany
-	@JoinTable(
-		      name = "usuario_enderecos",
-		      joinColumns = {@JoinColumn(name = "usuario_id")},
-		      inverseJoinColumns = {@JoinColumn(name = "endereco_id")})
+	@JoinTable(name = "usuario_enderecos", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "endereco_id") })
 	private List<Endereco> enderecos = new ArrayList<>();
-	
+
 	public Usuario() {
 	}
 
