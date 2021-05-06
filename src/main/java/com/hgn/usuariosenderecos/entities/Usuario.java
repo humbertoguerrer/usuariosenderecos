@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +15,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
 
 @Entity
 public class Usuario {
@@ -37,10 +42,12 @@ public class Usuario {
 	@NotBlank(message = "Este campo é de preenchimento obrigatório")
 	private String cpf;
 
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	@NotNull
+	@Past(message = "A data deve estar no passado")
 	private Date dataNascimento;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "usuario_enderecos", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "endereco_id") })
 	private List<Endereco> enderecos = new ArrayList<>();
