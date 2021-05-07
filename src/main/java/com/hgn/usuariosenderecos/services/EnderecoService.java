@@ -1,7 +1,5 @@
 package com.hgn.usuariosenderecos.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +12,8 @@ public class EnderecoService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 
-	public List<Endereco> listarTodos() {
-		return enderecoRepository.findAll();
+	public Endereco salvar(Endereco endereco) {
+		return enderecoRepository.save(endereco);
 	}
+
 }

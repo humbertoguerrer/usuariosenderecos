@@ -1,5 +1,6 @@
 package com.hgn.usuariosenderecos.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,28 +24,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String nome;
 
 	@Column(unique = true)
-	@Email(message = "Digite um e-mail válido")
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@Email(message = "Digite um e-mail válido.")
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String email;
 
 	@Column(unique = true)
-	@CPF(message = "Digite um CPF válido")
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@CPF(message = "Digite um CPF válido.")
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String cpf;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@NotNull
-	@Past(message = "A data deve estar no passado")
+	@Past(message = "A data deve estar no passado.")
 	private Date dataNascimento;
 
 	@OneToMany(cascade = CascadeType.PERSIST)

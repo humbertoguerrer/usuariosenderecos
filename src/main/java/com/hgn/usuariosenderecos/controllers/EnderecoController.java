@@ -1,11 +1,12 @@
 package com.hgn.usuariosenderecos.controllers;
 
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,16 +19,15 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping(value = "/enderecos")
 @Api(value = "Endereços")
-//@CrossOrigin(origins = "*")
 public class EnderecoController {
 
 	@Autowired
 	private EnderecoService enderecoService;
 
-	@GetMapping
-	@ApiOperation(value = "Retorna todos os endereços cadastrados")
-	public ResponseEntity<List<Endereco>> listarTodos() {
-		List<Endereco> todosEnderecos = enderecoService.listarTodos();
-		return ResponseEntity.ok().body(todosEnderecos);
+	@PostMapping
+	@ApiOperation(value = "Insere um novo endereço")
+	public ResponseEntity<String> salvar(@Valid @RequestBody Endereco endereco) {
+		enderecoService.salvar(endereco);
+		return ResponseEntity.status(HttpStatus.CREATED).body("O novo endereço foi cadastrado.");
 	}
 }

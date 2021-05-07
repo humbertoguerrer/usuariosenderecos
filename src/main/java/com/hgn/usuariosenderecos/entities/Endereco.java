@@ -1,5 +1,7 @@
 package com.hgn.usuariosenderecos.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,39 +11,41 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Endereco {
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String logradouro;
-	
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String numero;
-	
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String complemento;
-	
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String bairro;
-	
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String cidade;
-	
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String estado;
-	
-	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+
+	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
 	private String cep;
 
+	@JsonIgnore
 	@ManyToOne
-	@JoinTable(
-		      name = "usuario_enderecos",
-		      joinColumns = {@JoinColumn(name = "endereco_id")},
-		      inverseJoinColumns = {@JoinColumn(name = "usuario_id")})
+	@JoinTable(name = "usuario_enderecos", joinColumns = { @JoinColumn(name = "endereco_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "usuario_id") })
 	private Usuario usuario;
 
 	public Endereco() {
