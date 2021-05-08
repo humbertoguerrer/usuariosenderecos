@@ -35,7 +35,7 @@ public class UsuarioController {
 			Usuario usuario = usuarioService.buscarPorId(id);
 			return ResponseEntity.ok().body(usuario);
 		} catch (NoSuchElementException e) {
-			throw new UsuarioNaoEncontradoException("O usuario procurado não existe.");
+			throw new UsuarioNaoEncontradoException("O usuário procurado não existe.");
 		}
 	}
 
