@@ -11,6 +11,7 @@ Implementar uma API REST para o cadastro de usu√°rios e seus respectivos endere√
 - Java 11
 - Spring Boot
 - Hibernate e Spring Data JPA
+- Spring Cloud Feign
 - MySQL
 - Spring Tool Suite
 - Swagger
