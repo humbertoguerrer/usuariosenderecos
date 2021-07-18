@@ -25,116 +25,109 @@ import com.sun.istack.NotNull;
 
 @Entity
 public class Usuario implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
-	private String nome;
+    private String nome;
 
-	@Column(unique = true)
-	@Email(message = "Digite um e-mail válido.")
-	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
-	private String email;
+    @Column(unique = true)
+    private String email;
 
-	@Column(unique = true)
-	@CPF(message = "Digite um CPF válido.")
-	@NotBlank(message = "Este campo é de preenchimento obrigatório.")
-	private String cpf;
+    @Column(unique = true)
+    private String cpf;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	@NotNull
-	@Past(message = "A data deve estar no passado.")
-	private Date dataNascimento;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataNascimento;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "usuario_enderecos", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "endereco_id") })
-	private List<Endereco> enderecos = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "usuario_enderecos", joinColumns = {@JoinColumn(name = "usuario_id")}, inverseJoinColumns = {
+            @JoinColumn(name = "endereco_id")})
+    private List<Endereco> enderecos = new ArrayList<>();
 
-	public Usuario() {
-	}
+    public Usuario() {
+    }
 
-	public Usuario(Integer id, String nome, String email, String cpf, Date dataNascimento) {
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-	}
+    public Usuario(Long id, String nome, String email, String cpf, Date dataNascimento) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
 
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Usuario other = (Usuario) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
 }

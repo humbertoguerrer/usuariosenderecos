@@ -1,5 +1,6 @@
 package com.hgn.usuariosenderecos.services;
 
+import com.hgn.usuariosenderecos.dto.EnderecoDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,5 +11,5 @@ import com.hgn.usuariosenderecos.entities.Endereco;
 public interface CepService {
 
     @GetMapping("{cep}/json")
-    Endereco buscaEnderecoCEP(@PathVariable("cep") String cep);
+    EnderecoDTO buscaEnderecoCEP(@PathVariable("cep") String cep);
 }

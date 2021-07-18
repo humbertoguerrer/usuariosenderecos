@@ -1,27 +1,38 @@
 package com.hgn.usuariosenderecos.services;
 
-import java.util.Optional;
-
+import com.hgn.usuariosenderecos.dto.UsuarioDTO;
+import com.hgn.usuariosenderecos.entities.Usuario;
+import com.hgn.usuariosenderecos.repositories.UsuarioRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hgn.usuariosenderecos.entities.Usuario;
-import com.hgn.usuariosenderecos.repositories.UsuarioRepository;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-	public Usuario buscarPorId(Integer id) {
-		Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
-		Usuario usuario = optionalUsuario.get();
-		return usuario;
-	}
+    @Autowired
+    private ModelMapper modelMapper;
 
-	public Usuario salvar(Usuario usuario) {
-		return usuarioRepository.save(usuario);
-	}
+    public UsuarioDTO buscarPorId(Long id) {
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+        return toUsuarioDTO(optionalUsuario.get());
+    }
 
+    public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {
+        usuarioRepository.save(toUsuario(usuarioDTO));
+        return (usuarioDTO);
+    }
+
+    private Usuario toUsuario(UsuarioDTO usuarioDTO) {
+        return modelMapper.map(usuarioDTO, Usuario.class);
+    }
+
+    private UsuarioDTO toUsuarioDTO(Usuario usuario) {
+        return modelMapper.map(usuario, UsuarioDTO.class);
+    }
 }

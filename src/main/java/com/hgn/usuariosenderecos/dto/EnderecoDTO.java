@@ -1,44 +1,38 @@
-package com.hgn.usuariosenderecos.entities;
+package com.hgn.usuariosenderecos.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hgn.usuariosenderecos.entities.Usuario;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 
-@Entity
-public class Endereco implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class EnderecoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @NotBlank(message = "Este campo é de preenchimento obrigatório.")
     private String logradouro;
 
+    @NotBlank(message = "Este campo é de preenchimento obrigatório.")
     private String numero;
 
+    @NotBlank(message = "Este campo é de preenchimento obrigatório.")
     private String complemento;
 
+    @NotBlank(message = "Este campo é de preenchimento obrigatório.")
     private String bairro;
 
+    @NotBlank(message = "Este campo é de preenchimento obrigatório.")
     private String localidade;
 
+    @NotBlank(message = "Este campo é de preenchimento obrigatório.")
     private String uf;
 
+    @NotBlank(message = "Este campo é de preenchimento obrigatório.")
     private String cep;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinTable(name = "usuario_enderecos", joinColumns = {@JoinColumn(name = "endereco_id")}, inverseJoinColumns = {
-            @JoinColumn(name = "usuario_id")})
     private Usuario usuario;
 
-    public Endereco() {
+    public EnderecoDTO() {
     }
 
-    public Endereco(Long id, String logradouro, String numero, String complemento, String bairro, String localidade,
-                    String uf, String cep, Usuario usuario) {
-        this.id = id;
+    public EnderecoDTO(String logradouro, String numero, String complemento, String bairro, String localidade, String uf, String cep, Usuario usuario) {
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -47,14 +41,6 @@ public class Endereco implements Serializable {
         this.uf = uf;
         this.cep = cep;
         this.usuario = usuario;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogradouro() {
@@ -120,5 +106,4 @@ public class Endereco implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
 }

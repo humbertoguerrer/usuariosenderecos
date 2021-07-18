@@ -2,6 +2,7 @@ package com.hgn.usuariosenderecos.controllers;
 
 import javax.validation.Valid;
 
+import com.hgn.usuariosenderecos.dto.EnderecoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,17 +34,17 @@ public class EnderecoController {
 
 	@PostMapping
 	@ApiOperation(value = "Insere um novo endereço")
-	public ResponseEntity<String> salvar(@Valid @RequestBody Endereco endereco) {
-		enderecoService.salvar(endereco);
+	public ResponseEntity<String> salvar(@Valid @RequestBody EnderecoDTO enderecoDTO) {
+		enderecoService.salvar(enderecoDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body("O novo endereço foi cadastrado.");
 	}
 
 	@GetMapping("/{cep}")
 	@ResponseStatus(HttpStatus.OK)
 	@ApiOperation(value = "Retorna um endereço buscado através da API do VIACEP")
-	public ResponseEntity<Endereco> getCep(@PathVariable String cep) {
-		Endereco endereco = cepService.buscaEnderecoCEP(cep);
-		return ResponseEntity.ok().body(endereco);
+	public ResponseEntity<EnderecoDTO> getCep(@PathVariable String cep) {
+		EnderecoDTO enderecoDTO = cepService.buscaEnderecoCEP(cep);
+		return ResponseEntity.ok().body(enderecoDTO);
 
 	}
 
