@@ -6,6 +6,8 @@ import javax.validation.constraints.NotBlank;
 
 public class EnderecoDTO {
 
+
+
     @NotBlank(message = "Este campo é de preenchimento obrigatório.")
     private String logradouro;
 
